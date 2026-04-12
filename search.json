@@ -144,7 +144,7 @@
     "href": "index.html#exercício-objectivo",
     "title": "Arquitetura de SI e Estratégias de Armazenamento",
     "section": "Exercício — objectivo",
-    "text": "Exercício — objectivo\nCriar o menor ficheiro .zip possível a partir de uma pasta com ficheiros de imagem, áudio, vídeo e um CSV clínico simulado.\n\n\n\nFicheiros fornecidos\n\nUm ou mais ficheiros de imagem\nUm ou mais ficheiros de áudio\nUm ou mais ficheiros de vídeo\nUm ficheiro CSV com dados clínicos fictícios\n\n\nLogística\n\nTrabalho em pares\nEntrega no Moodle da UC\nDownload dos ficheiros: exercicio.zip\n\n\n\nDistribuir a pasta com os ficheiros neste momento. Os alunos podem trabalhar em pares. Confirmar o prazo de entrega com base no calendário da UC."
+    "text": "Exercício — objectivo\nCriar o menor ficheiro .zip possível a partir de uma pasta com vários ficheiros.\n\n\n\nFicheiros fornecidos\n\nImagem: 1.jpg (JPEG, 1.3 MB) e 4.tiff (TIFF, 29 MB)\nÁudio: 2.wav (WAV, 1.5 MB), 3.mp3 (MP3, 2.3 MB) e 5.flac (FLAC, 92 MB)\nTexto: 6.txt (TXT, 1.2 MB)\nDocumento: 7.pdf (PDF, 826 KB)\n\n\nLogística\n\nTrabalho em pares\nEntrega no Moodle da UC\nDownload dos ficheiros: pasta ficheiros/ no GitHub (botão direito → “Save link as…” em cada ficheiro)\n\n\n\nDistribuir a pasta com os ficheiros neste momento. Os alunos podem trabalhar em pares. Confirmar o prazo de entrega com base no calendário da UC."
   },
   {
     "objectID": "index.html#exercício-regras",
