@@ -1,0 +1,11 @@
+/.quarto/
+/_site/
+/docs/
+*.html
+!index.qmd
+!exercicio.qmd
+.DS_Store
+
+**/*.quarto_ipynb
+ficheiros/5.flac
+ficheiros/exercicio.zip

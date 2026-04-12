@@ -1,0 +1,33 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      
+      - name: Create exercicio.zip
+        run: |
+          cd ficheiros
+          zip exercicio.zip 1.jpg 2.wav 3.mp3 4.tiff 5.flac 6.txt 7.pdf
+          cd ..
+      
+      - name: Render Quarto Project
+        run: quarto render
+      
+      - name: Deploy to GitHub Pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,88 @@
+---
+title: "Exercício Prático — TP8"
+subtitle: "Compressão e conversão de ficheiros"
+format:
+  html:
+    toc: true
+    css: custom.css
+---
+
+## Objectivo
+
+Criar um ficheiro `.zip` com o menor tamanho possível, a partir de uma pasta fornecida com ficheiros de imagem, som, vídeo e um ficheiro clínico simulado (CSV com dados fictícios de pacientes).
+
+O exercício é realizado em pares durante a aula. A entrega é feita na plataforma da UC antes da TP9.
+
+## Ficheiros fornecidos
+
+A pasta de trabalho contém:
+
+- um ou mais ficheiros de imagem
+- um ou mais ficheiros de áudio
+- um ou mais ficheiros de vídeo
+- um ficheiro CSV com dados clínicos fictícios
+
+O número exacto de ficheiros e os seus formatos originais são comunicados no início da sessão prática.
+
+## Regras
+
+### O que é permitido
+
+- Alterar o formato dos ficheiros (converter entre formatos equivalentes).
+- Ajustar parâmetros de compressão, desde que não se perca conteúdo perceptível.
+- Usar ferramentas de conversão online ou instaladas localmente.
+
+### O que não é permitido
+
+- Remover ficheiros da pasta.
+- Alterar o conteúdo visível ou audível: não cortar, não fazer crop, não adicionar filtros ou efeitos.
+- Mudar a extensão de um ficheiro sem realizar a conversão efectiva.
+- Reduzir a resolução abaixo de 720p em vídeo ou abaixo de 72 dpi em imagens.
+
+## Ferramentas sugeridas
+
+[123apps.com/pt/](https://123apps.com/pt/) — conversor online de áudio, vídeo e imagem; não requer instalação.
+
+Podem usar outras ferramentas, desde que respeitem as regras acima.
+
+## Entregáveis
+
+Entregar um único ficheiro `.zip` que contenha:
+
+1. Todos os ficheiros convertidos (com os nomes originais mantidos, ainda que a extensão possa ter mudado).
+2. Um ficheiro de texto `registo.txt` com o seguinte conteúdo:
+
+### Estrutura do `registo.txt`
+
+Para cada ficheiro da pasta original:
+
+| Campo | Descrição |
+|-------|-----------|
+| Nome do ficheiro original | Nome e extensão antes de qualquer conversão |
+| Tamanho original | Em kilobytes (KB) |
+| Conversão aplicada | Formato original → formato final (ex: `WAV → MP3`) |
+| Tamanho após conversão | Em kilobytes (KB) |
+| Rácio de compressão | Tamanho final / tamanho original (ex: `0.08`) |
+
+No final do `registo.txt`, incluir:
+
+- Tamanho total do ZIP final (em KB)
+- Soma dos tamanhos originais de todos os ficheiros (em KB)
+- Rácio de compressão global (tamanho do ZIP / soma dos tamanhos originais)
+
+### Pergunta de reflexão
+
+Responder no `registo.txt`, em 3 a 5 frases:
+
+> Qual o tipo de ficheiro que mais contribuiu para a redução de tamanho? Porquê?
+
+## Critérios de avaliação
+
+O exercício é avaliado em duas dimensões com peso igual:
+
+- Resultado técnico: tamanho do ficheiro ZIP final em relação aos outros grupos.
+- Registo e reflexão: completude do `registo.txt` e qualidade da resposta à pergunta de reflexão.
+
+## Dúvidas
+
+Dúvidas durante ou após a sessão: endereço de e-mail da UC (indicado no Moodle).
