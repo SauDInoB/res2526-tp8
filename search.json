@@ -1,0 +1,240 @@
+[
+  {
+    "objectID": "index.html#bem-vindos-à-tp8",
+    "href": "index.html#bem-vindos-à-tp8",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Bem-vindos à TP8",
+    "text": "Bem-vindos à TP8\nHoje trabalhamos dois temas complementares:\n\nComo se organizam os sistemas de informação em saúde — as suas camadas e a sua arquitectura\nEm que forma existem os dados — formatos, compressão, e o que isso implica para armazenamento e partilha\n\n\nEstes temas são a base técnica que suporta tudo o que vimos até agora: interoperabilidade, uso secundário, e o que veremos a seguir — segurança e privacidade.\n\nContextualizar a aula como ponte. Os alunos já conhecem o quê (tipos de dados, normas, utilizadores) — hoje vêem o onde e o como. Perguntar: “Quando guardam uma fotografia no telemóvel, pensam onde ela fica fisicamente? Em que formato? Quanto espaço ocupa?” Estas questões aparentemente triviais têm implicações sérias em contexto clínico."
+  },
+  {
+    "objectID": "index.html#materiais",
+    "href": "index.html#materiais",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Materiais",
+    "text": "Materiais\nTodos os materiais desta aula estão disponíveis em:\nsaudinob.github.io/res2526-tp8\n\nConfirmar que o site está acessível antes de começar. O exercício prático está incluído na própria apresentação — os alunos podem seguir a partir daqui."
+  },
+  {
+    "objectID": "index.html#agenda",
+    "href": "index.html#agenda",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Agenda",
+    "text": "Agenda\n\nRevisão — tipos de dados e enquadramento legal\nArquitectura de sistemas de informação\nEstratégias de armazenamento — bases de dados e cloud\nFormatos de ficheiros e compressão\nFormatos específicos de saúde\nExercício prático\n\n\nA aula está dividida em dois blocos. O primeiro (pontos 1 a 3) é mais conceptual — entender como os sistemas se organizam e onde os dados ficam. O segundo (pontos 4 a 6) é mais técnico e prático, e prepara directamente o exercício. Há ligações explícitas às TPs anteriores ao longo de toda a aula."
+  },
+  {
+    "objectID": "index.html#tipos-de-dados-em-saúde",
+    "href": "index.html#tipos-de-dados-em-saúde",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Tipos de dados em saúde",
+    "text": "Tipos de dados em saúde\n\n\nEstruturados\nValores em campos bem definidos: resultados de análises, sinais vitais, prescrições, diagnósticos codificados (ICD-10, SNOMED CT).\n\nSemi-estruturados\nCom esquema flexível: mensagens HL7, recursos FHIR em JSON/XML, dados de dispositivos IoT.\n\nNão estruturados\nSem esquema predefinido: notas clínicas em texto livre, imagens médicas, gravações de voz, vídeos cirúrgicos.\n\n\nFazer a ligação com o que já viram. Na TP5 falaram de HL7 e FHIR — esses são semi-estruturados. Na TP6 falaram de dicionários de dados — que servem precisamente para estruturar dados que de outro modo seriam desestruturados. Perguntar: “Em que categoria colocam uma nota de alta hospitalar?” A resposta honesta é que depende — se for texto livre, não estruturado; se for um documento com campos preenchidos, pode ser semi-estruturado."
+  },
+  {
+    "objectID": "index.html#enquadramento-legal-uma-recordação",
+    "href": "index.html#enquadramento-legal-uma-recordação",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Enquadramento legal — uma recordação",
+    "text": "Enquadramento legal — uma recordação\nOs dados de saúde têm estatuto especial em duas dimensões:\n\nLei n.º 12/2005: os dados de saúde pertencem ao titular — não à instituição que os produz.\nArt. 9.º do RGPD: dados de saúde são dados pessoais de categoria especial — o seu tratamento requer base legal reforçada e medidas de segurança acrescidas.\n\n\nEstas obrigações condicionam onde os dados podem estar, quem pode aceder, por quanto tempo, e como podem ser partilhados.\n\n\n\n\n\n\nNote\n\n\nO enquadramento legal é um requisito de arquitectura — não uma consideração posterior ao desenho técnico.\n\n\n\n\nRelembrar a TP3 (requisitos de RES) e a TP4 (utilizadores e acessos). Sublinhar que decisões de armazenamento têm implicações legais directas. A TP9 aprofundará estes temas. Exemplo: se um hospital decide guardar dados na cloud, precisa de garantir que o fornecedor cumpre o RGPD e que os dados não saem do Espaço Económico Europeu sem salvaguardas adequadas."
+  },
+  {
+    "objectID": "index.html#o-que-é-uma-arquitectura-de-si",
+    "href": "index.html#o-que-é-uma-arquitectura-de-si",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "O que é uma arquitectura de SI?",
+    "text": "O que é uma arquitectura de SI?\nUma arquitectura de sistema de informação é um plano que define como os dados, as aplicações, as tecnologias e as pessoas se articulam.\n\nNão é um organigrama, nem um diagrama de rede. É uma linguagem comum que permite:\n\nperceber o que existe e como se relaciona\ntomar decisões de investimento e integração\ngarantir que novos componentes se encaixam no conjunto\n\n\nEvitar frameworks como Zachman ou TOGAF — não são relevantes para este nível. O que importa é a intuição. Exemplo concreto: perguntar aos alunos se já tentaram consultar um resultado de análise clínica no portal do SNS e o resultado ainda não estava disponível, apesar de o colherem há dias. Esse atraso tem uma causa arquitectural — os sistemas do laboratório e o portal não estão integrados em tempo real. Perceber a arquitectura é perceber porquê."
+  },
+  {
+    "objectID": "index.html#camadas-de-arquitectura",
+    "href": "index.html#camadas-de-arquitectura",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Camadas de arquitectura",
+    "text": "Camadas de arquitectura\n\n\nLado do cliente\n\nCamada de apresentação: interface gráfica — browser, app móvel, ecrã de posto clínico\n\nLado do servidor\n\nCamada de aplicação: lógica de negócio, regras clínicas, APIs\nCamada de acesso a dados: queries, mapeamento objeto-relacional\nCamada de dados: bases de dados, sistemas de ficheiros, PACS\n\n\n┌─────────────────────┐\n│   Apresentação      │  ← browser / app\n├─────────────────────┤  ─ ─ ─ ─ ─ ─ ─ ─ ─\n│   Aplicação         │  ← lógica clínica\n├─────────────────────┤\n│   Acesso a dados    │  ← queries / APIs\n├─────────────────────┤\n│   Dados             │  ← BD / ficheiros\n└─────────────────────┘\n\n\nUsar o SClínico como fio condutor. A interface que o médico vê é a camada de apresentação. As regras que validam uma prescrição (dose máxima, interacções medicamentosas) estão na camada de aplicação. Os dados do utente estão na camada de dados. A camada de acesso a dados é a que “traduz” pedidos da aplicação em operações sobre a base de dados. Perguntar: “Se um médico vê um alerta de interacção medicamentosa, em que camada está essa lógica?”"
+  },
+  {
+    "objectID": "index.html#exemplos-no-contexto-do-sns",
+    "href": "index.html#exemplos-no-contexto-do-sns",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Exemplos no contexto do SNS",
+    "text": "Exemplos no contexto do SNS\n\n\nSClínico\nSistema clínico em centros de saúde e hospitais do SNS. Cobre as quatro camadas:\n\nApresentação: interface web para médicos e enfermeiros\nAplicação: gestão de episódios, prescrição, alertas clínicos\nAcesso a dados: integração com laboratório e imagiologia\nDados: registos de utentes, episódios, prescrições\n\n\nPlataforma de Dados da Saúde (PDS)\nCamada de integração transversal ao SNS:\n\nAgrega dados de múltiplos sistemas hospitalares\nExpõe APIs para aplicações autorizadas (SNS 24, portal do utente)\nImplementa o Resumo de Saúde do Utente (RSU)\nNão substitui os sistemas hospitalares — complementa-os\n\n\n\nPerguntar se algum aluno já acedeu ao portal do SNS ou ao SNS 24. O RSU que aparece no portal vem da PDS, que por sua vez agrega dados de hospitais com sistemas diferentes. Isto é integração — o tema da TP5. A PDS é um exemplo de arquitectura de integração: não centraliza os dados, mas actua como mediador entre sistemas heterogéneos."
+  },
+  {
+    "objectID": "index.html#bases-de-dados-três-modelos",
+    "href": "index.html#bases-de-dados-três-modelos",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Bases de dados: três modelos",
+    "text": "Bases de dados: três modelos\n\n\nRelacional\nTabelas, linhas, colunas. Esquema rígido e predefinido. Adequado para dados estruturados com relações bem definidas.\nEx: prescrições, análises, faturação.\n\nDocumental\nDocumentos JSON ou XML, sem esquema fixo. Adequado para dados semi-estruturados ou com estrutura variável.\nEx: recursos FHIR, notas clínicas estruturadas.\n\nData lake\nArmazenamento massivo de dados em bruto. Adequado para uso secundário e análise.\nEx: imagens DICOM, dados de wearables, texto clínico para treino de LLMs.\n\n\nLigar à TP6: os dicionários de dados fazem sentido sobretudo para bases relacionais, onde o esquema é rígido. Num data lake, a flexibilidade é maior — mas o risco de “data swamp” (dados sem catálogo, sem metadados, inutilizáveis) também é maior. Perguntar: “Um PACS — sistema de arquivo de imagens médicas — em que categoria enquadram?” É essencialmente um sistema especializado de armazenamento de ficheiros (DICOM), não uma base de dados relacional clássica."
+  },
+  {
+    "objectID": "index.html#on-premise-vs-cloud",
+    "href": "index.html#on-premise-vs-cloud",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "On-premise vs cloud",
+    "text": "On-premise vs cloud\n\n\nOn-premise\nServidores físicos instalados no próprio hospital ou datacenter. A instituição controla o hardware, o software e a segurança.\n\nTradição dominante nos hospitais portugueses\nMaior controlo directo, maior responsabilidade operacional\nCustos de capital elevados; actualização lenta\n\n\nCloud\nInfraestrutura gerida por um fornecedor externo (AWS, Azure, Google Cloud). A instituição paga pelo uso.\n\nEscalabilidade e flexibilidade operacional\nCustos operacionais em vez de capital\nQuestões de soberania, jurisdição e localização dos dados\n\n\n\nNo SNS, a maioria dos hospitais mantém infraestrutura on-premise, com experiências piloto em cloud para análise de dados secundária.\n\nMencionar que a decisão on-premise vs cloud não é apenas técnica — é política e legal. Perguntar: “Se um hospital português guarda dados de doentes num servidor em Virgínia (EUA), que problemas podem surgir?” As respostas incluem: jurisdição (os dados ficam sujeitos ao direito americano, incluindo o Cloud Act), RGPD (transferências para fora do EEE requerem salvaguardas), e soberania de dados. Não é necessário aprofundar — apenas sensibilizar para a dimensão não técnica da decisão."
+  },
+  {
+    "objectID": "index.html#soberania-de-dados-e-o-ehds",
+    "href": "index.html#soberania-de-dados-e-o-ehds",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Soberania de dados e o EHDS",
+    "text": "Soberania de dados e o EHDS\nSoberania de dados: os dados estão sujeitos às leis do país onde foram recolhidos — independentemente de onde estão fisicamente armazenados.\n\nO European Health Data Space (EHDS) propõe um enquadramento europeu:\n\nUso primário: o utente e o clínico acedem aos dados de saúde em qualquer Estado-membro.\nUso secundário: investigação e inovação — com governação reforçada e consentimento explícito.\nInfraestrutura federated: os dados não precisam de sair do país para serem analisados conjuntamente.\n\n\n\n\n\n\n\nTip\n\n\nO EHDS articula directamente com o que viram na TP6 sobre uso secundário de dados de saúde.\n\n\n\n\nO EHDS é um regulamento europeu aprovado em 2024, em fase de implementação gradual. O que importa é a ideia central: a Europa quer que os dados de saúde possam ser partilhados para investigação sem que os países percam o controlo sobre eles. A infraestrutura federated resolve isto — em vez de centralizar dados num repositório europeu, os algoritmos de análise “viajam” até aos dados, que ficam nos países. É uma solução arquitectural para um problema de soberania."
+  },
+  {
+    "objectID": "index.html#da-arquitectura-ao-ficheiro",
+    "href": "index.html#da-arquitectura-ao-ficheiro",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Da arquitectura ao ficheiro",
+    "text": "Da arquitectura ao ficheiro\nAté agora falámos de como os sistemas se organizam e onde os dados ficam.\nMas os dados existem sob uma forma concreta: são ficheiros, com um formato específico, guardados em suportes específicos.\n\nO formato de um ficheiro determina:\n\nque informação é preservada e o que é descartado na gravação\nquanta capacidade de armazenamento é necessária\nque ferramentas são necessárias para abrir e processar o conteúdo\nse o ficheiro pode ser transmitido de forma eficiente\n\n\nSlide de transição. Pedir aos alunos que pensem num ficheiro de áudio gravado durante uma teleconsulta — formato WAV versus MP3. Qual é a diferença prática? Tamanho, qualidade, compatibilidade com diferentes sistemas. Essas são exactamente as dimensões que vamos explorar. E algumas dessas dimensões têm implicações clínicas e legais directas."
+  },
+  {
+    "objectID": "index.html#classificação-por-tipo",
+    "href": "index.html#classificação-por-tipo",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Classificação por tipo",
+    "text": "Classificação por tipo\n\n\n\n\n\n\n\n\nTipo\nFormatos comuns\nUso típico em saúde\n\n\n\n\nTexto\nCSV, JSON, XML, TXT\nDados tabulares, recursos FHIR, configuração de sistemas\n\n\nDocumento\nPDF, DOCX\nRelatórios clínicos, notas de alta, consentimentos informados\n\n\nImagem\nJPEG, PNG, SVG, DICOM\nFotografias clínicas, dermatoscopia, radiologia\n\n\nÁudio\nWAV, MP3, AAC, FLAC\nAusculta cardíaca, gravações de teleconsulta\n\n\nVídeo\nMP4, AVI, WEBM\nCirurgia, endoscopia, videoconsulta\n\n\n\n\nNão percorrer a tabela linha a linha. O objectivo é dar uma panorâmica — cada linha corresponde a decisões de armazenamento e processamento distintas. Perguntar: “Um electrocardiograma digital — texto, imagem, ou outro?” Pode ser ambos: os dados em bruto são numéricos (estruturados), mas a visualização é uma imagem. Esta ambiguidade é comum em saúde."
+  },
+  {
+    "objectID": "index.html#formatos-texto-documento-e-imagem",
+    "href": "index.html#formatos-texto-documento-e-imagem",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Formatos: texto, documento e imagem",
+    "text": "Formatos: texto, documento e imagem\n\n\n\nFormato\nCompressão\nPerda de qualidade\nUso típico\n\n\n\n\nCSV / TXT\nNenhuma\n—\nDados tabulares, logs clínicos\n\n\nJSON / XML\nNenhuma\n—\nAPIs, interoperabilidade\n\n\nPDF\nLossless\nNão\nDocumentos formatados\n\n\nJPEG\nLossy\nSim\nFotografia, imagem clínica geral\n\n\nPNG\nLossless\nNão\nCapturas de ecrã, imagens com transparência\n\n\nDICOM\nLossless (típico)\nNão\nImagem médica (radiologia, TC, RM)\n\n\n\n\nPorquê não guardar radiografias em JPEG, sendo que é o formato de imagem mais comum? Porque usa compressão lossy — descarta informação. Perguntar: “Um electrocardiograma digital — texto, imagem, ou outro?” Pode ser ambos: os dados em bruto são numéricos (estruturados), mas a visualização é uma imagem."
+  },
+  {
+    "objectID": "index.html#formatos-áudio-e-vídeo",
+    "href": "index.html#formatos-áudio-e-vídeo",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Formatos: áudio e vídeo",
+    "text": "Formatos: áudio e vídeo\n\n\n\n\n\n\n\n\n\nFormato\nCompressão\nPerda de qualidade\nUso típico\n\n\n\n\nWAV\nNenhuma\n—\nÁudio de alta fidelidade\n\n\nMP3 / AAC\nLossy\nSim\nÁudio para distribuição e arquivo\n\n\nFLAC\nLossless\nNão\nArquivo de áudio de qualidade clínica\n\n\nMP4 / WEBM\nLossy (típico)\nSim\nVídeo para distribuição e teleconsulta\n\n\nAVI\nVariável\nVariável\nVídeo, edição cirúrgica\n\n\n\n\nPorquê é que o WAV ocupa tanto espaço comparado com o MP3? Porque não usa nenhuma compressão. Perguntar: “Que tipo de compressão usariam para arquivar a gravação de vídeo de um procedimento cirúrgico endoscópico?” O trade-off entre tamanho e fidelidade diagnóstica é o núcleo da decisão — e prepara directamente o exercício prático."
+  },
+  {
+    "objectID": "index.html#sem-perdas-vs-com-perdas",
+    "href": "index.html#sem-perdas-vs-com-perdas",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Sem perdas vs com perdas",
+    "text": "Sem perdas vs com perdas\n\n\nLossless (sem perdas)\nO ficheiro descomprimido é bit a bit idêntico ao original. Nenhuma informação é descartada.\nUsado quando a fidelidade é crítica: texto, código, imagens médicas, arquivos legais.\nExemplos: PNG, FLAC, DICOM em modo lossless, ZIP, 7z.\n\nLossy (com perdas)\nO algoritmo descarta informação que considera perceptualmente irrelevante. O ficheiro descomprimido é uma aproximação do original.\nUsado quando o tamanho é prioritário e a perda é aceitável para o uso previsto.\nExemplos: JPEG, MP3, AAC, MP4 com H.264 ou H.265.\n\n\n\n\n\n\nWarning\n\n\nCompressão com perdas em imagens de diagnóstico é geralmente inaceitável — pode comprometer a leitura de achados subtis.\n\n\n\n\n\nExemplo concreto: uma mamografia comprimida com JPEG pode perder detalhes de microcalcificações — alterações que são indicadores precoces de neoplasia. É por isso que o DICOM em modo lossless é o padrão em radiologia. Perguntar: “Que tipo de compressão usariam para arquivar a gravação de vídeo de um procedimento cirúrgico endoscópico?” O trade-off entre tamanho e fidelidade diagnóstica é o núcleo da decisão."
+  },
+  {
+    "objectID": "index.html#o-efeito-da-qualidade-jpeg",
+    "href": "index.html#o-efeito-da-qualidade-jpeg",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "O efeito da qualidade JPEG",
+    "text": "O efeito da qualidade JPEG\n\n\nA compressão JPEG usa um parâmetro de qualidade (0–100) que controla o equilíbrio entre tamanho e fidelidade:\n\nQ = 100: maior fidelidade, maior tamanho\nQ = 80: diferenças imperceptíveis; tamanho ~6× menor\nQ = 50: artefactos de bloco visíveis em bordos\nQ = 20: degradação severa; tamanho ~30× menor\n\nPara uso clínico de diagnóstico, Q abaixo de 95 é geralmente desaconselhado.\n\n\n\n\nSe possível, preparar um exemplo real com uma imagem de domínio público (por exemplo, do dataset ISIC de dermatoscopia). O objectivo não é a discussão técnica do algoritmo DCT subjacente — é a intuição de que compressão com perdas tem consequências visíveis e potencialmente clínicas. Os valores de tamanho dados são ilustrativos; os rácios reais dependem da imagem."
+  },
+  {
+    "objectID": "index.html#formatos-de-arquivo-comprimido",
+    "href": "index.html#formatos-de-arquivo-comprimido",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Formatos de arquivo comprimido",
+    "text": "Formatos de arquivo comprimido\nPara transferir ou arquivar conjuntos de ficheiros, usam-se formatos de arquivo:\n\n\n\n\n\n\n\n\nFormato\nAlgoritmo\nNotas\n\n\n\n\nZIP\nDeflate (lossless)\nUniversal; suportado nativamente em Windows, macOS e Linux\n\n\nRAR\nProprietário (lossless)\nCompressão ligeiramente melhor; requer software específico\n\n\n7z\nLZMA (lossless)\nMelhor taxa de compressão disponível; open source\n\n\ntar.gz\ngzip (lossless)\nPadrão em sistemas Unix/Linux; tar agrega, gzip comprime\n\n\n\n\nNo exercício prático de hoje, o objectivo é produzir o menor ficheiro .zip possível.\n\nNotar que estes formatos comprimem o conjunto de ficheiros sem alterar o seu conteúdo — são diferentes de JPEG ou MP3, que alteram o próprio conteúdo durante a gravação. Um ZIP de um conjunto de ficheiros JPEG não vai reduzir muito o tamanho total, porque o JPEG já está comprimido internamente. A escolha do formato do conteúdo é mais determinante do que o formato do arquivo. Esta intuição é central para o exercício."
+  },
+  {
+    "objectID": "index.html#dicom-o-formato-da-imagem-médica",
+    "href": "index.html#dicom-o-formato-da-imagem-médica",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "DICOM — o formato da imagem médica",
+    "text": "DICOM — o formato da imagem médica\nDICOM (Digital Imaging and Communications in Medicine) é o formato padrão para imagens médicas desde 1993.\n\nNão é apenas uma imagem: cada ficheiro DICOM contém a imagem e um conjunto extenso de metadados clínicos estruturados.\nOs metadados incluem: identificação do utente, data e hora do estudo, modalidade de aquisição (TC, RM, RX, ecografia, PET), equipamento e parâmetros de aquisição.\nOs sistemas PACS (Picture Archiving and Communication Systems) organizam, arquivam e distribuem ficheiros DICOM dentro e entre instituições.\n\n\n\n\n\n\n\nNote\n\n\nNa TP5 falámos de interoperabilidade — o DICOM é um dos pilares dessa interoperabilidade em imagiologia, a par de perfis IHE (Integrating the Healthcare Enterprise).\n\n\n\n\nPerguntar: “O que acontece quando um doente muda de hospital — o novo hospital consegue abrir os DICOM do anterior?” Em teoria sim, porque o DICOM é um standard. Na prática, há variações de implementação e barreiras institucionais. Mencionar que o DICOM usa compressão lossless por omissão (JPEG-LS ou RLE), embora suporte compressão lossy. Em muitos países, incluindo Portugal, a compressão com perdas em imagens de diagnóstico requer aprovação regulatória específica."
+  },
+  {
+    "objectID": "index.html#metadados-e-privacidade",
+    "href": "index.html#metadados-e-privacidade",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Metadados e privacidade",
+    "text": "Metadados e privacidade\nUm ficheiro digital raramente é apenas o seu conteúdo visível — contém também metadados incorporados na própria estrutura.\n\n\nJPEG com metadados EXIF\nUma fotografia tirada com telemóvel pode conter:\n\nData e hora exactas\nCoordenadas GPS (geolocalização)\nFabricante e modelo do dispositivo\nDefinições da câmara (ISO, abertura, exposição)\n\nUma fotografia de uma lesão cutânea partilhada sem remover os EXIF pode revelar a localização exacta do doente.\n\nDICOM com metadados clínicos\nUm ficheiro DICOM contém nos seus headers:\n\nNome, data de nascimento, número de utente\nIdentificador do estudo e da série\nNome do médico requisitante\nInstituição onde o exame foi realizado\n\n\n\n\n\n\n\nWarning\n\n\nA partilha de ficheiros DICOM sem anonimização prévia constitui uma violação do RGPD.\n\n\n\n\n\nEsta ponte para a TP9 é deliberada. A privacidade não é apenas uma questão de controlo de acessos — é também uma questão de formato e metadados. Perguntar: “Se eu converter um DICOM para JPEG para partilhar numa reunião clínica, o problema dos metadados desaparece?” Não completamente — depende de como é feita a conversão. Ferramentas específicas de anonimização de DICOM (como o DICOM Anonymizer) existem precisamente para este fim."
+  },
+  {
+    "objectID": "index.html#exercício-objectivo",
+    "href": "index.html#exercício-objectivo",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Exercício — objectivo",
+    "text": "Exercício — objectivo\nCriar o menor ficheiro .zip possível a partir de uma pasta com ficheiros de imagem, áudio, vídeo e um CSV clínico simulado.\n\n\n\nFicheiros fornecidos\n\nUm ou mais ficheiros de imagem\nUm ou mais ficheiros de áudio\nUm ou mais ficheiros de vídeo\nUm ficheiro CSV com dados clínicos fictícios\n\n\nLogística\n\nTrabalho em pares\nEntrega no Moodle da UC\nDownload dos ficheiros: exercicio.zip\n\n\n\nDistribuir a pasta com os ficheiros neste momento. Os alunos podem trabalhar em pares. Confirmar o prazo de entrega com base no calendário da UC."
+  },
+  {
+    "objectID": "index.html#exercício-regras",
+    "href": "index.html#exercício-regras",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Exercício — regras",
+    "text": "Exercício — regras\n\n\nÉ permitido\n\nAlterar o formato dos ficheiros (converter entre formatos equivalentes)\nAjustar parâmetros de compressão, desde que não se perca conteúdo perceptível\nUsar ferramentas de conversão online ou instaladas localmente\n\n\nNão é permitido\n\nRemover ficheiros da pasta\nCortar, fazer crop, ou alterar o conteúdo visível ou audível\nMudar a extensão sem realizar a conversão efectiva\nReduzir a resolução abaixo de 720p em vídeo ou 72 dpi em imagens\n\n\n\nA regra central é: comprimir sem degradar. O desafio técnico está em perceber quais os formatos que permitem maior compressão sem perda perceptível de qualidade. Isto obriga os alunos a aplicar o que aprenderam sobre lossless vs lossy."
+  },
+  {
+    "objectID": "index.html#exercício-ferramentas",
+    "href": "index.html#exercício-ferramentas",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Exercício — ferramentas",
+    "text": "Exercício — ferramentas\n123apps.com/pt/ — conversor online de áudio, vídeo e imagem; não requer instalação.\n\nPodem usar outras ferramentas, desde que respeitem as regras acima.\n\nO 123apps é acessível no browser sem instalar nada — adequado para contexto de sala de aula. Quem tiver ferramentas instaladas (Audacity, HandBrake, FFmpeg) pode usá-las. O objectivo não é a ferramenta em si, mas a decisão de conversão."
+  },
+  {
+    "objectID": "index.html#exercício-entregável",
+    "href": "index.html#exercício-entregável",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Exercício — entregável",
+    "text": "Exercício — entregável\nUm único ficheiro .zip com:\n\nTodos os ficheiros convertidos (nomes originais mantidos; extensão pode mudar)\nUm ficheiro registo.txt\n\n\nEstrutura do registo.txt — para cada ficheiro:\n\n\n\nCampo\nExemplo\n\n\n\n\nNome do ficheiro original\naudio.wav\n\n\nTamanho original\n4 200 KB\n\n\nConversão aplicada\nWAV → MP3\n\n\nTamanho após conversão\n350 KB\n\n\nRácio de compressão\n0.08\n\n\n\nNo final: tamanho do ZIP final, soma dos tamanhos originais, e rácio global.\n\nO registo.txt é tão importante quanto o ZIP. Queremos ver que os alunos percebem o que fizeram e porquê — não apenas que conseguiram um ficheiro menor."
+  },
+  {
+    "objectID": "index.html#exercício-reflexões",
+    "href": "index.html#exercício-reflexões",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Exercício — reflexões",
+    "text": "Exercício — reflexões\nPerguntas de reflexão (3 a 5 frases, incluir no registo.txt):\n\nQual o tipo de ficheiro que mais contribuiu para a redução de tamanho? Porquê? Se tivesse de escolher um formato de arquivo para arquivar estes dados a longo prazo, qual escolheria? Justifique a sua escolha. Que implicações clínicas ou legais poderiam surgir se os ficheiros fossem partilhados sem a conversão adequada?"
+  },
+  {
+    "objectID": "index.html#questões-e-próxima-aula",
+    "href": "index.html#questões-e-próxima-aula",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Questões e próxima aula",
+    "text": "Questões e próxima aula\nNa TP9: segurança, privacidade e ética em RES — os fundamentos legais e técnicos para proteger os dados que hoje aprendemos a armazenar e a gerir.\n\nContacto e materiais:\n\nDúvidas sobre o exercício: endereço de e-mail da UC\nTodos os materiais: saudinob.github.io/res2526-tp8\n\n\nTerminar com a ligação explícita à TP9. Tudo o que falámos hoje — arquitectura, armazenamento, formatos, metadados — tem implicações de segurança e privacidade que serão o tema da próxima aula. Os alunos devem entregar o exercício antes da TP9; confirmar o prazo exacto com base no calendário da UC."
+  },
+  {
+    "objectID": "exercicio.html",
+    "href": "exercicio.html",
+    "title": "Exercício Prático — TP8",
+    "section": "",
+    "text": "Criar um ficheiro .zip com o menor tamanho possível, a partir de uma pasta fornecida com ficheiros de imagem, som, vídeo e um ficheiro clínico simulado (CSV com dados fictícios de pacientes).\nO exercício é realizado em pares durante a aula. A entrega é feita na plataforma da UC antes da TP9."
+  },
+  {
+    "objectID": "exercicio.html#objectivo",
+    "href": "exercicio.html#objectivo",
+    "title": "Exercício Prático — TP8",
+    "section": "",
+    "text": "Criar um ficheiro .zip com o menor tamanho possível, a partir de uma pasta fornecida com ficheiros de imagem, som, vídeo e um ficheiro clínico simulado (CSV com dados fictícios de pacientes).\nO exercício é realizado em pares durante a aula. A entrega é feita na plataforma da UC antes da TP9."
+  },
+  {
+    "objectID": "exercicio.html#ficheiros-fornecidos",
+    "href": "exercicio.html#ficheiros-fornecidos",
+    "title": "Exercício Prático — TP8",
+    "section": "Ficheiros fornecidos",
+    "text": "Ficheiros fornecidos\nA pasta de trabalho contém:\n\num ou mais ficheiros de imagem\num ou mais ficheiros de áudio\num ou mais ficheiros de vídeo\num ficheiro CSV com dados clínicos fictícios\n\nO número exacto de ficheiros e os seus formatos originais são comunicados no início da sessão prática."
+  },
+  {
+    "objectID": "exercicio.html#regras",
+    "href": "exercicio.html#regras",
+    "title": "Exercício Prático — TP8",
+    "section": "Regras",
+    "text": "Regras\n\nO que é permitido\n\nAlterar o formato dos ficheiros (converter entre formatos equivalentes).\nAjustar parâmetros de compressão, desde que não se perca conteúdo perceptível.\nUsar ferramentas de conversão online ou instaladas localmente.\n\n\n\nO que não é permitido\n\nRemover ficheiros da pasta.\nAlterar o conteúdo visível ou audível: não cortar, não fazer crop, não adicionar filtros ou efeitos.\nMudar a extensão de um ficheiro sem realizar a conversão efectiva.\nReduzir a resolução abaixo de 720p em vídeo ou abaixo de 72 dpi em imagens."
+  },
+  {
+    "objectID": "exercicio.html#ferramentas-sugeridas",
+    "href": "exercicio.html#ferramentas-sugeridas",
+    "title": "Exercício Prático — TP8",
+    "section": "Ferramentas sugeridas",
+    "text": "Ferramentas sugeridas\n123apps.com/pt/ — conversor online de áudio, vídeo e imagem; não requer instalação.\nPodem usar outras ferramentas, desde que respeitem as regras acima."
+  },
+  {
+    "objectID": "exercicio.html#entregáveis",
+    "href": "exercicio.html#entregáveis",
+    "title": "Exercício Prático — TP8",
+    "section": "Entregáveis",
+    "text": "Entregáveis\nEntregar um único ficheiro .zip que contenha:\n\nTodos os ficheiros convertidos (com os nomes originais mantidos, ainda que a extensão possa ter mudado).\nUm ficheiro de texto registo.txt com o seguinte conteúdo:\n\n\nEstrutura do registo.txt\nPara cada ficheiro da pasta original:\n\n\n\n\n\n\n\nCampo\nDescrição\n\n\n\n\nNome do ficheiro original\nNome e extensão antes de qualquer conversão\n\n\nTamanho original\nEm kilobytes (KB)\n\n\nConversão aplicada\nFormato original → formato final (ex: WAV → MP3)\n\n\nTamanho após conversão\nEm kilobytes (KB)\n\n\nRácio de compressão\nTamanho final / tamanho original (ex: 0.08)\n\n\n\nNo final do registo.txt, incluir:\n\nTamanho total do ZIP final (em KB)\nSoma dos tamanhos originais de todos os ficheiros (em KB)\nRácio de compressão global (tamanho do ZIP / soma dos tamanhos originais)\n\n\n\nPergunta de reflexão\nResponder no registo.txt, em 3 a 5 frases:\n\nQual o tipo de ficheiro que mais contribuiu para a redução de tamanho? Porquê?"
+  },
+  {
+    "objectID": "exercicio.html#critérios-de-avaliação",
+    "href": "exercicio.html#critérios-de-avaliação",
+    "title": "Exercício Prático — TP8",
+    "section": "Critérios de avaliação",
+    "text": "Critérios de avaliação\nO exercício é avaliado em duas dimensões com peso igual:\n\nResultado técnico: tamanho do ficheiro ZIP final em relação aos outros grupos.\nRegisto e reflexão: completude do registo.txt e qualidade da resposta à pergunta de reflexão."
+  },
+  {
+    "objectID": "exercicio.html#dúvidas",
+    "href": "exercicio.html#dúvidas",
+    "title": "Exercício Prático — TP8",
+    "section": "Dúvidas",
+    "text": "Dúvidas\nDúvidas durante ou após a sessão: endereço de e-mail da UC (indicado no Moodle)."
+  }
+]
