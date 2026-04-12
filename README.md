@@ -15,3 +15,5 @@ quarto render
 ```
 
 Os ficheiros gerados ficam em `docs/`.
+
+Deploy automático via GitHub Actions.
