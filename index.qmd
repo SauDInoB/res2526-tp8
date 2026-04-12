@@ -536,7 +536,7 @@ Criar o **menor ficheiro `.zip` possível** a partir de uma pasta com vários fi
 
 - Trabalho em pares
 - Entrega no Moodle da UC
-- Download dos ficheiros: [exercicio.zip](ficheiros/exercicio.zip)
+- Download dos ficheiros: [pasta ficheiros/ no GitHub](https://github.com/SauDInoB/res2526-tp8/tree/main/ficheiros) (botão direito → "Save link as..." em cada ficheiro)
 :::
 :::
 
