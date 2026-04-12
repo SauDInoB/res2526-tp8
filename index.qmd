@@ -2,6 +2,7 @@
 title: "Arquitetura de SI e Estratégias de Armazenamento"
 subtitle: "TP8 · Registos Electrónicos de Saúde"
 date: "2026-04-13"
+author: "Tiago Jacinto · tiagojct.eu · tiagojacinto@med.up.pt"
 format:
   revealjs:
     theme: simple
@@ -517,7 +518,7 @@ Esta ponte para a TP9 é deliberada. A privacidade não é apenas uma questão d
 
 ## Exercício — objectivo
 
-Criar o **menor ficheiro `.zip` possível** a partir de uma pasta com ficheiros de imagem, áudio, vídeo e um CSV clínico simulado.
+Criar o **menor ficheiro `.zip` possível** a partir de uma pasta com vários ficheiros.
 
 . . .
 
@@ -525,10 +526,10 @@ Criar o **menor ficheiro `.zip` possível** a partir de uma pasta com ficheiros 
 ::: {.column width="50%"}
 **Ficheiros fornecidos**
 
-- Um ou mais ficheiros de imagem
-- Um ou mais ficheiros de áudio
-- Um ou mais ficheiros de vídeo
-- Um ficheiro CSV com dados clínicos fictícios
+- Imagem: `1.jpg` (JPEG, 1.3 MB) e `4.tiff` (TIFF, 29 MB)
+- Áudio: `2.wav` (WAV, 1.5 MB), `3.mp3` (MP3, 2.3 MB) e `5.flac` (FLAC, 92 MB)
+- Texto: `6.txt` (CSV, 1.2 MB) — dados clínicos fictícios
+- Documento: `7.pdf` (PDF, 826 KB) — relatório de exemplo
 :::
 ::: {.column .fragment width="50%"}
 **Logística**
