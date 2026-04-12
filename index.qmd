@@ -2,7 +2,15 @@
 title: "Arquitetura de SI e Estratégias de Armazenamento"
 subtitle: "TP8 · Registos Electrónicos de Saúde"
 date: "2026-04-13"
-author: "Tiago Jacinto · tiagojct.eu · tiagojacinto@med.up.pt"
+author:
+  - name: Tiago Jacinto
+    id: tj
+    orcid: 0000-0002-7897-1101
+    email: tiagojacinto@med.up.pt
+    affiliation: 
+      - name: Faculty of Medicine of the University of Porto
+        city: Porto
+        url: https://med.up.pt
 format:
   revealjs:
     theme: simple
@@ -14,7 +22,7 @@ format:
     center: true
     highlight-style: github
     code-line-numbers: true
-    footer: "Registos Electrónicos de Saúde · SauD InoB · FMUP"
+    footer: "RES 25/26 · SauD InoB · FMUP"
 ---
 
 # Introdução {background-color="#2C3E50"}
