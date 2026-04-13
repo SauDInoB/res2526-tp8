@@ -650,95 +650,6 @@ Tiago Jacinto <a href="https://orcid.org/0000-0002-7897-1101" class="quarto-titl
           display:block!important;
       }</style></aside>
 </section>
-<section id="algoritmos-de-compressão-em-ação" class="slide level2 smaller center">
-<h2>Algoritmos de compressão em ação</h2>
-</section>
-<section class="slide level2 center">
-
-<p><strong>Exemplo 1: Matemática — padrões repetitivos</strong></p>
-<blockquote>
-<p>Quantas operações são necessárias para somar oito 2’s?</p>
-</blockquote>
-<pre><code>2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 = ?        (8 operações, 15 caracteres)</code></pre>
-<div class="fragment">
-<pre><code>2 × 8 = 16                                 (1 operação, 7 caracteres)</code></pre>
-<p><strong>Economia</strong>: ~50% do espaço + menos cálculos</p>
-</div>
-</section>
-<section class="slide level2 center">
-
-<p><strong>Exemplo 2: Nota clínica — Run-Length Encoding (RLE)</strong></p>
-<blockquote>
-<p><strong>Desafio</strong>: A nota de alta tem 47 palavras. Quantas são únicas?</p>
-</blockquote>
-<p>Texto original:</p>
-<pre><code>"O doente apresentou dor torácica intensa. A dor era intensa e
-persistente. Persistiu dor com irradiação. Dor intensa."</code></pre>
-<p>Identificando repetições: - “dor” aparece 4 vezes - “intensa” aparece 3 vezes</p>
-<p>Comprimido (RLE):</p>
-<pre><code>"O doente apresentou [dor×4] torácica [intensa×3]. Persistente
-com irradiação."</code></pre>
-<p><strong>Economia</strong>: ~35% do espaço (lossless — sem perda de informação)</p>
-</section>
-<section class="slide level2 center">
-
-<p><strong>Técnicas reais usadas nos formatos:</strong></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 23%">
-<col style="width: 39%">
-<col style="width: 36%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Técnica</th>
-<th>Como funciona</th>
-<th>Onde é usada</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>RLE</strong></td>
-<td>Substitui repetições por [valor×contagem]</td>
-<td>ZIP base, imagens BMP</td>
-</tr>
-<tr class="even">
-<td><strong>Huffman coding</strong></td>
-<td>Códigos curtos para símbolos frequentes</td>
-<td>ZIP, JPEG, MP3</td>
-</tr>
-<tr class="odd">
-<td><strong>DCT</strong></td>
-<td>Descarta frequências invisíveis ao olho</td>
-<td>JPEG (compressão lossy)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section class="slide level2 center">
-
-<p><strong>Para o exercício de hoje:</strong></p>
-<blockquote>
-<p>Aplicarão estes conceitos: converter entre formatos é escolher o algoritmo certo para cada tipo de dados — sem perder qualidade perceptível.</p>
-</blockquote>
-<aside class="notes">
-<p>Este slide ilustra os princípios fundamentais da compressão com dois exemplos concretos:</p>
-<p><strong>Exemplo matemático</strong>: A compressão é identificar padrões. Somar oito 2’s é redundante — multiplicar é mais eficiente. Os algoritmos de compressão fazem isto automaticamente: procuram padrões repetidos e substituem por representações mais compactas.</p>
-<p><strong>Exemplo da nota clínica</strong>: RLE (Run-Length Encoding) é o algoritmo mais simples. Em ficheiros reais, algoritmos mais sofisticados como o Huffman coding analisam a frequência de cada símbolo: se “e” aparece 15% das vezes em português, recebe um código binário curto (ex: “01”); se “z” aparece 0,1%, recebe código longo (ex: “111010”). O resultado é um ficheiro mais compacto sem perda de informação.</p>
-<p><strong>DCT (Discrete Cosine Transform)</strong>: Base do JPEG. Transforma a imagem em frequências e descarta as altas frequências (detalhes finos) que o olho humano percebe menos. Por isso o JPEG é lossy — a informação descartada não volta. Em contexto clínico, isto é perigoso: uma mamografia comprimida em JPEG pode perder microcalcificações, que são indicadores precoces de cancro. Daí o DICOM usar JPEG-LS (lossless, baseado em predição) por omissão.</p>
-<p><strong>Ligação ao exercício</strong>: Os alunos vão aplicar este conhecimento prático. Converter WAV para MP3 é aceitar perdas perceptualmente irrelevantes (Huffman + psychoacoustic model). Converter TIFF para JPEG é aplicar DCT. A escolha do formato é a escolha do algoritmo de compressão adequado ao conteúdo e ao contexto de uso.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="classificação-por-tipo" class="slide level2 smaller center">
 <h2>Classificação por tipo</h2>
 <table class="caption-top">
@@ -958,6 +869,96 @@ com irradiação."</code></pre>
 </div></div>
 <aside class="notes">
 <p>Exemplo concreto: uma mamografia comprimida com JPEG pode perder detalhes de microcalcificações — alterações que são indicadores precoces de neoplasia. É por isso que o DICOM em modo lossless é o padrão em radiologia. Perguntar: “Que tipo de compressão usariam para arquivar a gravação de vídeo de um procedimento cirúrgico endoscópico?” O trade-off entre tamanho e fidelidade diagnóstica é o núcleo da decisão.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="algoritmos-de-compressão-como-funcionam" class="slide level2 smaller center">
+<h2>Algoritmos de compressão — como funcionam?</h2>
+<blockquote>
+<p><strong>Conceito fundamental</strong>: A compressão é identificar e eliminar redundância — informação que pode ser reconstruída a partir de outra informação.</p>
+</blockquote>
+</section>
+<section class="slide level2 center">
+
+<h3 id="exemplo-1-padrões-matemáticos">Exemplo 1: Padrões matemáticos</h3>
+<blockquote>
+<p>Quantas operações são necessárias para somar oito 2’s?</p>
+</blockquote>
+<p>. . .</p>
+<p><strong>Original</strong> (redundante):</p>
+<pre><code>2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 = ?        (8 operações, 15 caracteres)</code></pre>
+<p><strong>Comprimido</strong> (padrão identificado):</p>
+<pre><code>2 × 8 = 16                                 (1 operação, 7 caracteres)</code></pre>
+<p><strong>Economia</strong>: ~50% do espaço + menos cálculos</p>
+</section>
+<section class="slide level2 center">
+
+<h3 id="exemplo-2-texto-clínico-run-length-encoding-rle">Exemplo 2: Texto clínico — Run-Length Encoding (RLE)</h3>
+<blockquote>
+<p><strong>Desafio</strong>: A nota de alta tem 47 palavras. Quantas são únicas?</p>
+</blockquote>
+<p>Texto original:</p>
+<pre><code>"O doente apresentou dor torácica intensa. A dor era intensa e
+persistente. Persistiu dor com irradiação. Dor intensa."</code></pre>
+<p>. . .</p>
+<p>Análise de padrões: - “dor” aparece 4 vezes - “intensa” aparece 3 vezes</p>
+<p>Comprimido (RLE):</p>
+<pre><code>"O doente apresentou [dor×4] torácica [intensa×3]. Persistente
+com irradiação."</code></pre>
+<p><strong>Economia</strong>: ~35% do espaço (<strong>lossless</strong> — sem perda de informação)</p>
+</section>
+<section class="slide level2 center">
+
+<h3 id="técnicas-reais-nos-formatos">Técnicas reais nos formatos</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 37%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Técnica</th>
+<th>Princípio</th>
+<th>Formato</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RLE</strong></td>
+<td>Codifica repetições (<code>AAAA</code> → <code>A×4</code>)</td>
+<td>BMP, TIFF</td>
+</tr>
+<tr class="even">
+<td><strong>Huffman</strong></td>
+<td>Códigos curtos para símbolos frequentes</td>
+<td>ZIP, JPEG, MP3</td>
+</tr>
+<tr class="odd">
+<td><strong>DCT</strong></td>
+<td>Descarta frequências imperceptíveis</td>
+<td>JPEG (<strong>lossy</strong>)</td>
+</tr>
+<tr class="even">
+<td><strong>LZMA</strong></td>
+<td>Dicionário de padrões recorrentes</td>
+<td>7z, ZIP</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p><strong>RLE (Run-Length Encoding)</strong>: Algoritmo mais simples. Eficaz em imagens com áreas de cor uniforme (ex: diagramas, ícones). Ineficaz em fotografias complexas.</p>
+<p><strong>Huffman coding</strong>: Baseado na frequência estatística. Se “e” aparece 15% das vezes em português, recebe código binário curto (ex: “01”). Se “z” aparece 0,1%, recebe código longo (ex: “111010”). O resultado é um ficheiro mais compacto sem perda de informação — por isso é usado em compressão lossless.</p>
+<p><strong>DCT (Discrete Cosine Transform)</strong>: Usado no JPEG. Transforma a imagem em componentes de frequência e descarta as altas frequências (detalhes finos) que o olho humano percebe menos. Como a informação descartada não pode ser recuperada, o JPEG é <strong>lossy</strong>. Veremos nas próximas slides o impacto clínico concreto desta escolha.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1310,7 +1311,7 @@ com irradiação."</code></pre>
 <div class="fragment">
 <p>Contacto e materiais:</p>
 <ul>
-<li>Dúvidas sobre o exercício: endereço de e-mail da UC</li>
+<li>Dúvidas sobre o exercício: <a href="mailto:tiagojacinto@med.up.pt">tiagojacinto@med.up.pt</a></li>
 <li>Todos os materiais: <a href="https://SauDInoB.github.io/res2526-tp8">saudinob.github.io/res2526-tp8</a></li>
 </ul>
 <aside class="notes">

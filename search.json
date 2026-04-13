@@ -91,13 +91,6 @@
     "text": "Do bit ao yottabyte\n\n\n\n\n\n\n\n\n\n\nUnidade\nBinário\nDecimal\n≈ Folhas A4*\nContexto em saúde\n\n\n\n\nbit (b)\n—\n—\n—\n0 ou 1; interruptor ligado/desligado\n\n\nbyte (B)\n8 b\n8 b\n½ caractere\nUm caractere (‘A’); código ASCII\n\n\nkilobyte (KB)\n1 024 B\n1 000 B\n½ página\nPrescrição simples; 1 segundo de ECG\n\n\nmegabyte (MB)\n1 024 KB\n1 000 KB\n500 páginas\nRadiografia DICOM (~15 MB); 1 min MP3\n\n\ngigabyte (GB)\n1 024 MB\n1 000 MB\n1 000 livros\nEstudo TC completo (~500 MB); RES de 1 utente\n\n\nterabyte (TB)\n1 024 GB\n1 000 GB\n1 biblioteca\nPACS anual de hospital médio (~50 TB)\n\n\npetabyte (PB)\n1 024 TB\n1 000 TB\n1 000 bibliotecas\nData warehouse SNS; genomas de 100k utentes\n\n\nexabyte (EB)\n1 024 PB\n1 000 PB\n—\nTodo o conteúdo da Web em 2010\n\n\nzettabyte (ZB)\n1 024 EB\n1 000 EB\n—\nTodo o conteúdo digital mundial (2025)\n\n\nyottabyte (YB)\n1 024 ZB\n1 000 ZB\n—\nLimite teórico atual\n\n\n\n* Estimativa: 1 página A4 ≈ 2 KB de texto simples; 1 livro ≈ 1 MB\n\nEsta tabela estabelece a escala desde a menor unidade (bit) até ao limite teórico actual (yottabyte). Três aspectos importantes:\n1. Binário vs. Decimal: Os fabricantes de discos (HD, SSD) usam o sistema decimal (1 GB = 10⁹ bytes), enquanto os sistemas operativos usam o sistema binário (1 GiB = 2³⁰ bytes = 1 073 741 824 bytes). Resultado: um disco anunciado como “1 TB” tem apenas ~931 GB de capacidade real visível pelo sistema. Isto é uma fonte frequente de confusão.\n2. Concretização em papel: Um RES completo de um utente ao longo da vida (50 anos de dados clínicos) ≈ 1-2 GB, o equivalente a ~1 000 livros empilhados. Um hospital de média dimensão gera o equivalente a uma biblioteca municipal por dia de operação.\n3. Limites físicos e futuro: Um yottabyte (10²⁴ bytes) é o limite atual dos sistemas de ficheiros. Para escala: equivale ao número de grãos de areia em todas as praias da Terra. O armazenamento molecular (DNA) promete revolucionar: 1 grama de DNA pode armazenar ~215 petabytes — toda a informação do mundo numa caixa de sapatos. Já existem protótipos funcionais. Em saúde, isto poderia permitir arquivar o genoma de toda a população mundial num único data center."
   },
   {
-    "objectID": "index.html#algoritmos-de-compressão-em-ação",
-    "href": "index.html#algoritmos-de-compressão-em-ação",
-    "title": "Arquitetura de SI e Estratégias de Armazenamento",
-    "section": "Algoritmos de compressão em ação",
-    "text": "Algoritmos de compressão em ação"
-  },
-  {
     "objectID": "index.html#classificação-por-tipo",
     "href": "index.html#classificação-por-tipo",
     "title": "Arquitetura de SI e Estratégias de Armazenamento",
@@ -124,6 +117,13 @@
     "title": "Arquitetura de SI e Estratégias de Armazenamento",
     "section": "Sem perdas vs com perdas",
     "text": "Sem perdas vs com perdas\n\n\nLossless (sem perdas)\nO ficheiro descomprimido é bit a bit idêntico ao original. Nenhuma informação é descartada.\nUsado quando a fidelidade é crítica: texto, código, imagens médicas, arquivos legais.\nExemplos: PNG, FLAC, DICOM em modo lossless, ZIP, 7z.\n\nLossy (com perdas)\nO algoritmo descarta informação que considera perceptualmente irrelevante. O ficheiro descomprimido é uma aproximação do original.\nUsado quando o tamanho é prioritário e a perda é aceitável para o uso previsto.\nExemplos: JPEG, MP3, AAC, MP4 com H.264 ou H.265.\n\n\n\n\n\n\nWarning\n\n\nCompressão com perdas em imagens de diagnóstico é geralmente inaceitável — pode comprometer a leitura de achados subtis.\n\n\n\n\n\nExemplo concreto: uma mamografia comprimida com JPEG pode perder detalhes de microcalcificações — alterações que são indicadores precoces de neoplasia. É por isso que o DICOM em modo lossless é o padrão em radiologia. Perguntar: “Que tipo de compressão usariam para arquivar a gravação de vídeo de um procedimento cirúrgico endoscópico?” O trade-off entre tamanho e fidelidade diagnóstica é o núcleo da decisão."
+  },
+  {
+    "objectID": "index.html#algoritmos-de-compressão-como-funcionam",
+    "href": "index.html#algoritmos-de-compressão-como-funcionam",
+    "title": "Arquitetura de SI e Estratégias de Armazenamento",
+    "section": "Algoritmos de compressão — como funcionam?",
+    "text": "Algoritmos de compressão — como funcionam?\n\nConceito fundamental: A compressão é identificar e eliminar redundância — informação que pode ser reconstruída a partir de outra informação."
   },
   {
     "objectID": "index.html#o-efeito-da-qualidade-jpeg",
@@ -193,7 +193,7 @@
     "href": "index.html#questões-e-próxima-aula",
     "title": "Arquitetura de SI e Estratégias de Armazenamento",
     "section": "Questões e próxima aula",
-    "text": "Questões e próxima aula\nNa TP9: segurança, privacidade e ética em RES — os fundamentos legais e técnicos para proteger os dados que hoje aprendemos a armazenar e a gerir.\n\nContacto e materiais:\n\nDúvidas sobre o exercício: endereço de e-mail da UC\nTodos os materiais: saudinob.github.io/res2526-tp8\n\n\nTerminar com a ligação explícita à TP9. Tudo o que falámos hoje — arquitectura, armazenamento, formatos, metadados — tem implicações de segurança e privacidade que serão o tema da próxima aula. Os alunos devem entregar o exercício antes da TP9; confirmar o prazo exacto com base no calendário da UC."
+    "text": "Questões e próxima aula\nNa TP9: segurança, privacidade e ética em RES — os fundamentos legais e técnicos para proteger os dados que hoje aprendemos a armazenar e a gerir.\n\nContacto e materiais:\n\nDúvidas sobre o exercício: tiagojacinto@med.up.pt\nTodos os materiais: saudinob.github.io/res2526-tp8\n\n\nTerminar com a ligação explícita à TP9. Tudo o que falámos hoje — arquitectura, armazenamento, formatos, metadados — tem implicações de segurança e privacidade que serão o tema da próxima aula. Os alunos devem entregar o exercício antes da TP9; confirmar o prazo exacto com base no calendário da UC."
   },
   {
     "objectID": "exercicio.html",
@@ -214,7 +214,7 @@
     "href": "exercicio.html#ficheiros-fornecidos",
     "title": "Exercício Prático — TP8",
     "section": "Ficheiros fornecidos",
-    "text": "Ficheiros fornecidos\nA pasta de trabalho contém:\n\num ou mais ficheiros de imagem\num ou mais ficheiros de áudio\num ou mais ficheiros de vídeo\num ficheiro CSV com dados clínicos fictícios\n\nO número exacto de ficheiros e os seus formatos originais são comunicados no início da sessão prática."
+    "text": "Ficheiros fornecidos\nA pasta de trabalho contém:\n\nImagem: 1.jpg (JPEG, 1.3 MB) e 4.tiff (TIFF, 29 MB)\nÁudio: 2.wav (WAV, 1.5 MB), 3.mp3 (MP3, 2.3 MB) e 5.flac (FLAC, 92 MB)\nTexto: 6.txt (CSV, 1.2 MB) — dados clínicos fictícios\nDocumento: 7.pdf (PDF, 826 KB) — relatório de exemplo\n\nTodos os ficheiros estão disponíveis na pasta ficheiros/ do repositório."
   },
   {
     "objectID": "exercicio.html#regras",
