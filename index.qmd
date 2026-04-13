@@ -332,6 +332,35 @@ Slide de transição. Pedir aos alunos que pensem num ficheiro de áudio gravado
 
 ---
 
+## Do bit ao yottabyte {.smaller}
+
+| Unidade | Binário | Decimal | ≈ Folhas A4* | Contexto em saúde |
+|---------|---------|---------|--------------|-------------------|
+| **bit (b)** | — | — | — | 0 ou 1; interruptor ligado/desligado |
+| **byte (B)** | 8 b | 8 b | ½ caractere | Um caractere ('A'); código ASCII |
+| **kilobyte (KB)** | 1 024 B | 1 000 B | ½ página | Prescrição simples; 1 segundo de ECG |
+| **megabyte (MB)** | 1 024 KB | 1 000 KB | 500 páginas | Radiografia DICOM (~15 MB); 1 min MP3 |
+| **gigabyte (GB)** | 1 024 MB | 1 000 MB | 1 000 livros | Estudo TC completo (~500 MB); RES de 1 utente |
+| **terabyte (TB)** | 1 024 GB | 1 000 GB | 1 biblioteca | PACS anual de hospital médio (~50 TB) |
+| **petabyte (PB)** | 1 024 TB | 1 000 TB | 1 000 bibliotecas | *Data warehouse* SNS; genomas de 100k utentes |
+| **exabyte (EB)** | 1 024 PB | 1 000 PB | — | Todo o conteúdo da Web em 2010 |
+| **zettabyte (ZB)** | 1 024 EB | 1 000 EB | — | Todo o conteúdo digital mundial (2025) |
+| **yottabyte (YB)** | 1 024 ZB | 1 000 ZB | — | Limite teórico atual |
+
+\* Estimativa: 1 página A4 ≈ 2 KB de texto simples; 1 livro ≈ 1 MB
+
+::: {.notes}
+Esta tabela estabelece a escala desde a menor unidade (bit) até ao limite teórico actual (yottabyte). Três aspectos importantes:
+
+**1. Binário vs. Decimal**: Os fabricantes de discos (HD, SSD) usam o sistema decimal (1 GB = 10⁹ bytes), enquanto os sistemas operativos usam o sistema binário (1 GiB = 2³⁰ bytes = 1 073 741 824 bytes). Resultado: um disco anunciado como "1 TB" tem apenas ~931 GB de capacidade real visível pelo sistema. Isto é uma fonte frequente de confusão.
+
+**2. Concretização em papel**: Um RES completo de um utente ao longo da vida (50 anos de dados clínicos) ≈ 1-2 GB, o equivalente a ~1 000 livros empilhados. Um hospital de média dimensão gera o equivalente a uma biblioteca municipal por dia de operação.
+
+**3. Limites físicos e futuro**: Um yottabyte (10²⁴ bytes) é o limite atual dos sistemas de ficheiros. Para escala: equivale ao número de grãos de areia em todas as praias da Terra. O armazenamento molecular (DNA) promete revolucionar: 1 grama de DNA pode armazenar ~215 petabytes — toda a informação do mundo numa caixa de sapatos. Já existem protótipos funcionais. Em saúde, isto poderia permitir arquivar o genoma de toda a população mundial num único data center.
+:::
+
+---
+
 ## Classificação por tipo {.smaller}
 
 | Tipo | Formatos comuns | Uso típico em saúde |
