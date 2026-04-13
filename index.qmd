@@ -481,8 +481,7 @@ Texto original:
 persistente. Persistiu dor com irradiação. Dor intensa."
 ```
 
-. . .
-
+::: {.fragment}
 Análise de padrões:
 - "dor" aparece 4 vezes
 - "intensa" aparece 3 vezes
@@ -494,6 +493,7 @@ com irradiação."
 ```
 
 **Economia**: ~35% do espaço (**lossless** — sem perda de informação)
+:::
 
 ---
 
