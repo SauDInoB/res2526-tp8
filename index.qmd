@@ -361,80 +361,6 @@ Esta tabela estabelece a escala desde a menor unidade (bit) até ao limite teór
 
 ---
 
-## Algoritmos de compressão em ação {.smaller}
-
----
-
-**Exemplo 1: Matemática — padrões repetitivos**
-
-> Quantas operações são necessárias para somar oito 2's?
-
-```
-2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 = ?        (8 operações, 15 caracteres)
-```
-
-. . .
-
-```
-2 × 8 = 16                                 (1 operação, 7 caracteres)
-```
-
-**Economia**: ~50% do espaço + menos cálculos
-
----
-
-**Exemplo 2: Nota clínica — Run-Length Encoding (RLE)**
-
-> **Desafio**: A nota de alta tem 47 palavras. Quantas são únicas?
-
-Texto original:
-```
-"O doente apresentou dor torácica intensa. A dor era intensa e
-persistente. Persistiu dor com irradiação. Dor intensa."
-```
-
-Identificando repetições:
-- "dor" aparece 4 vezes
-- "intensa" aparece 3 vezes
-
-Comprimido (RLE):
-```
-"O doente apresentou [dor×4] torácica [intensa×3]. Persistente
-com irradiação."
-```
-
-**Economia**: ~35% do espaço (lossless — sem perda de informação)
-
----
-
-**Técnicas reais usadas nos formatos:**
-
-| Técnica | Como funciona | Onde é usada |
-|---------|---------------|--------------|
-| **RLE** | Substitui repetições por [valor×contagem] | ZIP base, imagens BMP |
-| **Huffman coding** | Códigos curtos para símbolos frequentes | ZIP, JPEG, MP3 |
-| **DCT** | Descarta frequências invisíveis ao olho | JPEG (compressão lossy) |
-
----
-
-**Para o exercício de hoje:**
-
-> Aplicarão estes conceitos: converter entre formatos é escolher o algoritmo certo para cada tipo de dados — sem perder qualidade perceptível.
-
-::: {.notes}
-Este slide ilustra os princípios fundamentais da compressão com dois exemplos concretos:
-
-**Exemplo matemático**: A compressão é identificar padrões. Somar oito 2's é redundante — multiplicar é mais eficiente. Os algoritmos de compressão fazem isto automaticamente: procuram padrões repetidos e substituem por representações mais compactas.
-
-**Exemplo da nota clínica**: RLE (Run-Length Encoding) é o algoritmo mais simples. Em ficheiros reais, algoritmos mais sofisticados como o Huffman coding analisam a frequência de cada símbolo: se "e" aparece 15% das vezes em português, recebe um código binário curto (ex: "01"); se "z" aparece 0,1%, recebe código longo (ex: "111010"). O resultado é um ficheiro mais compacto sem perda de informação.
-
-**DCT (Discrete Cosine Transform)**: Base do JPEG. Transforma a imagem em frequências e descarta as altas frequências (detalhes finos) que o olho humano percebe menos. Por isso o JPEG é lossy — a informação descartada não volta. Em contexto clínico, isto é perigoso: uma mamografia comprimida em JPEG pode perder microcalcificações, que são indicadores precoces de cancro. Daí o DICOM usar JPEG-LS (lossless, baseado em predição) por omissão.
-
-**Ligação ao exercício**: Os alunos vão aplicar este conhecimento prático. Converter WAV para MP3 é aceitar perdas perceptualmente irrelevantes (Huffman + psychoacoustic model). Converter TIFF para JPEG é aplicar DCT. A escolha do formato é a escolha do algoritmo de compressão adequado ao conteúdo e ao contexto de uso.
-:::
-
----
-
 ## Classificação por tipo {.smaller}
 
 | Tipo | Formatos comuns | Uso típico em saúde |
@@ -515,6 +441,77 @@ Compressão com perdas em imagens de diagnóstico é geralmente inaceitável —
 
 ::: {.notes}
 Exemplo concreto: uma mamografia comprimida com JPEG pode perder detalhes de microcalcificações — alterações que são indicadores precoces de neoplasia. É por isso que o DICOM em modo lossless é o padrão em radiologia. Perguntar: "Que tipo de compressão usariam para arquivar a gravação de vídeo de um procedimento cirúrgico endoscópico?" O trade-off entre tamanho e fidelidade diagnóstica é o núcleo da decisão.
+:::
+
+---
+
+## Algoritmos de compressão — como funcionam? {.smaller}
+
+> **Conceito fundamental**: A compressão é identificar e eliminar redundância — informação que pode ser reconstruída a partir de outra informação.
+
+---
+
+### Exemplo 1: Padrões matemáticos
+
+> Quantas operações são necessárias para somar oito 2's?
+
+. . .
+
+**Original** (redundante):
+```
+2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 = ?        (8 operações, 15 caracteres)
+```
+
+**Comprimido** (padrão identificado):
+```
+2 × 8 = 16                                 (1 operação, 7 caracteres)
+```
+
+**Economia**: ~50% do espaço + menos cálculos
+
+---
+
+### Exemplo 2: Texto clínico — Run-Length Encoding (RLE)
+
+> **Desafio**: A nota de alta tem 47 palavras. Quantas são únicas?
+
+Texto original:
+```
+"O doente apresentou dor torácica intensa. A dor era intensa e
+persistente. Persistiu dor com irradiação. Dor intensa."
+```
+
+. . .
+
+Análise de padrões:
+- "dor" aparece 4 vezes
+- "intensa" aparece 3 vezes
+
+Comprimido (RLE):
+```
+"O doente apresentou [dor×4] torácica [intensa×3]. Persistente
+com irradiação."
+```
+
+**Economia**: ~35% do espaço (**lossless** — sem perda de informação)
+
+---
+
+### Técnicas reais nos formatos
+
+| Técnica | Princípio | Formato |
+|---------|-----------|---------|
+| **RLE** | Codifica repetições (`AAAA` → `A×4`) | BMP, TIFF |
+| **Huffman** | Códigos curtos para símbolos frequentes | ZIP, JPEG, MP3 |
+| **DCT** | Descarta frequências imperceptíveis | JPEG (**lossy**) |
+| **LZMA** | Dicionário de padrões recorrentes | 7z, ZIP |
+
+::: {.notes}
+**RLE (Run-Length Encoding)**: Algoritmo mais simples. Eficaz em imagens com áreas de cor uniforme (ex: diagramas, ícones). Ineficaz em fotografias complexas.
+
+**Huffman coding**: Baseado na frequência estatística. Se "e" aparece 15% das vezes em português, recebe código binário curto (ex: "01"). Se "z" aparece 0,1%, recebe código longo (ex: "111010"). O resultado é um ficheiro mais compacto sem perda de informação — por isso é usado em compressão lossless.
+
+**DCT (Discrete Cosine Transform)**: Usado no JPEG. Transforma a imagem em componentes de frequência e descarta as altas frequências (detalhes finos) que o olho humano percebe menos. Como a informação descartada não pode ser recuperada, o JPEG é **lossy**. Veremos nas próximas slides o impacto clínico concreto desta escolha.
 :::
 
 ---
@@ -744,7 +741,7 @@ Na TP9: segurança, privacidade e ética em RES — os fundamentos legais e téc
 
 Contacto e materiais:
 
-- Dúvidas sobre o exercício: endereço de e-mail da UC
+- Dúvidas sobre o exercício: [tiagojacinto@med.up.pt](mailto:tiagojacinto@med.up.pt)
 - Todos os materiais: [saudinob.github.io/res2526-tp8](https://SauDInoB.github.io/res2526-tp8)
 
 ::: {.notes}
