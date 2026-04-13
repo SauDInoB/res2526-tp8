@@ -361,6 +361,80 @@ Esta tabela estabelece a escala desde a menor unidade (bit) até ao limite teór
 
 ---
 
+## Algoritmos de compressão em ação {.smaller}
+
+---
+
+**Exemplo 1: Matemática — padrões repetitivos**
+
+> Quantas operações são necessárias para somar oito 2's?
+
+```
+2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 = ?        (8 operações, 15 caracteres)
+```
+
+. . .
+
+```
+2 × 8 = 16                                 (1 operação, 7 caracteres)
+```
+
+**Economia**: ~50% do espaço + menos cálculos
+
+---
+
+**Exemplo 2: Nota clínica — Run-Length Encoding (RLE)**
+
+> **Desafio**: A nota de alta tem 47 palavras. Quantas são únicas?
+
+Texto original:
+```
+"O doente apresentou dor torácica intensa. A dor era intensa e
+persistente. Persistiu dor com irradiação. Dor intensa."
+```
+
+Identificando repetições:
+- "dor" aparece 4 vezes
+- "intensa" aparece 3 vezes
+
+Comprimido (RLE):
+```
+"O doente apresentou [dor×4] torácica [intensa×3]. Persistente
+com irradiação."
+```
+
+**Economia**: ~35% do espaço (lossless — sem perda de informação)
+
+---
+
+**Técnicas reais usadas nos formatos:**
+
+| Técnica | Como funciona | Onde é usada |
+|---------|---------------|--------------|
+| **RLE** | Substitui repetições por [valor×contagem] | ZIP base, imagens BMP |
+| **Huffman coding** | Códigos curtos para símbolos frequentes | ZIP, JPEG, MP3 |
+| **DCT** | Descarta frequências invisíveis ao olho | JPEG (compressão lossy) |
+
+---
+
+**Para o exercício de hoje:**
+
+> Aplicarão estes conceitos: converter entre formatos é escolher o algoritmo certo para cada tipo de dados — sem perder qualidade perceptível.
+
+::: {.notes}
+Este slide ilustra os princípios fundamentais da compressão com dois exemplos concretos:
+
+**Exemplo matemático**: A compressão é identificar padrões. Somar oito 2's é redundante — multiplicar é mais eficiente. Os algoritmos de compressão fazem isto automaticamente: procuram padrões repetidos e substituem por representações mais compactas.
+
+**Exemplo da nota clínica**: RLE (Run-Length Encoding) é o algoritmo mais simples. Em ficheiros reais, algoritmos mais sofisticados como o Huffman coding analisam a frequência de cada símbolo: se "e" aparece 15% das vezes em português, recebe um código binário curto (ex: "01"); se "z" aparece 0,1%, recebe código longo (ex: "111010"). O resultado é um ficheiro mais compacto sem perda de informação.
+
+**DCT (Discrete Cosine Transform)**: Base do JPEG. Transforma a imagem em frequências e descarta as altas frequências (detalhes finos) que o olho humano percebe menos. Por isso o JPEG é lossy — a informação descartada não volta. Em contexto clínico, isto é perigoso: uma mamografia comprimida em JPEG pode perder microcalcificações, que são indicadores precoces de cancro. Daí o DICOM usar JPEG-LS (lossless, baseado em predição) por omissão.
+
+**Ligação ao exercício**: Os alunos vão aplicar este conhecimento prático. Converter WAV para MP3 é aceitar perdas perceptualmente irrelevantes (Huffman + psychoacoustic model). Converter TIFF para JPEG é aplicar DCT. A escolha do formato é a escolha do algoritmo de compressão adequado ao conteúdo e ao contexto de uso.
+:::
+
+---
+
 ## Classificação por tipo {.smaller}
 
 | Tipo | Formatos comuns | Uso típico em saúde |
@@ -654,9 +728,11 @@ O registo.txt é tão importante quanto o ZIP. Queremos ver que os alunos perceb
 
 **Perguntas de reflexão** (3 a 5 frases, incluir no `registo.txt`):
 
-> Qual o tipo de ficheiro que mais contribuiu para a redução de tamanho? Porquê?
-> Se tivesse de escolher um formato de arquivo para arquivar estes dados a longo prazo, qual escolheria? Justifique a sua escolha.
-> Que implicações clínicas ou legais poderiam surgir se os ficheiros fossem partilhados sem a conversão adequada?
+> Qual o tipo de ficheiro que mais contribuiu para a redução de tamanho? Porquê?  
+> 
+> Se tivesse de escolher um formato de arquivo para arquivar estes dados a longo prazo, qual escolheria? Justifique a sua escolha.  
+> 
+> Que implicações clínicas ou legais poderiam surgir se os ficheiros fossem partilhados sem a conversão adequada?  
 
 ---
 
